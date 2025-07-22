@@ -17,7 +17,6 @@ const navigationItems = [
   { icon: BookOpen, label: 'My Courses', href: '/courses', key: 'courses' },
   { icon: Video, label: 'Live Classes', href: '/live-classes', key: 'live-classes' },
   { icon: FileText, label: 'Assignments', href: '/assignments', key: 'assignments' },
-  { icon: Quiz, label: 'Quizzes & Tests', href: '/quizzes', key: 'quizzes' },
   { icon: Award, label: 'Certificates', href: '/certificates', key: 'certificates' },
   { icon: MessageCircle, label: 'Discussion Forums', href: '/forums', key: 'forums' },
   { icon: User, label: 'Profile', href: '/profile', key: 'profile' },
