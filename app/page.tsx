@@ -1,13 +1,20 @@
-"use client";
+'use client';
 
-import React from 'react';
-import DashboardLayout from '@/components/layout/DashboardLayout';
-import DashboardContent from '@/components/dashboard/DashboardContent';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  return (
-    <DashboardLayout currentPage="dashboard">
-      <DashboardContent />
-    </DashboardLayout>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('token'); // or cookies/session check
+
+    if (isLoggedIn) {
+      router.push('/dashboard');
+    } else {
+      router.push('/auth/login');
+    }
+  }, [router]);
+
+  return null;
 }
