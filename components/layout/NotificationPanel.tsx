@@ -203,7 +203,7 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
         </div>
 
         {/* Notifications List */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="overflow-y-auto max-h-[calc(100vh-200px)] scrollbar-hide">
           {filteredNotifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-gray-500">
               <Bell className="w-12 h-12 mb-4 opacity-50" />
@@ -211,7 +211,7 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
               <p className="text-sm">You're all caught up!</p>
             </div>
           ) : (
-            <div className="space-y-1 p-4">
+            <div className="space-y-4 p-4 ">
               {filteredNotifications.map((notification) => (
                 <div
                   key={notification.id}

@@ -111,3 +111,13 @@
     @apply bg-[#4F8FE5] text-white shadow-lg shadow-blue-200/50;
   }
 }
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
