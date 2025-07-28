@@ -36,7 +36,7 @@ export default function DashboardLayout({ children, currentPage }: DashboardLayo
         </div>
 
         {/* Main Content Area - Scrollable content only */}
-        <div className="flex-1 min-w-0 h-[97%] rounded-3xl mr-5">
+        <div className="flex-1 min-w-0 h-[97%] rounded-3xl sm:mr-5">
           <div className="h-full bg-gray-50 p-4 rounded-3xl overflow-y-auto scrollbar-hide">
             <div className="rounded-2xl bg-white p-6 min-h-full">
               {children}

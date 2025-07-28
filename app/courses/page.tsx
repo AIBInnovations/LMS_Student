@@ -171,53 +171,62 @@ export default function CoursesPage() {
         </div>
 
         {/* Filters */}
-        <div className="neumorphic-card p-6 hover-lift">
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
-                />
-              </div>
-            </div>
+        <div className="neumorphic-card p-6 hover-lift space-y-6">
+  {/* Search Section */}
+  <div className="space-y-2">
+    <h4 className="text-sm font-semibold text-gray-700">Search Courses</h4>
+    <div className="relative">
+      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+      <input
+        type="text"
+        placeholder="Search by title or keyword..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
+      />
+    </div>
+  </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className={selectedCategory === category ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
+  {/* Filters Section */}
+  <div className="grid grid-cols-1 md:grid-cols-[1fr,0.5fr] gap-6">
+    {/* Category Filter */}
+    <div className="space-y-2 border border-black/200 rounded-xl p-4">
+      <h4 className="text-sm font-semibold text-gray-700">Filter by Category</h4>
+      <div className="flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant={selectedCategory === category ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setSelectedCategory(category)}
+            className={selectedCategory === category ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
+    </div>
 
-            {/* Difficulty Filter */}
-            <div className="flex flex-wrap gap-2">
-              {difficulties.map((difficulty) => (
-                <Button
-                  key={difficulty}
-                  variant={selectedDifficulty === difficulty ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setSelectedDifficulty(difficulty)}
-                  className={selectedDifficulty === difficulty ? 'secondary-button' : 'hover:bg-white/80 rounded-xl'}
-                >
-                  {difficulty}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </div>
+    {/* Difficulty Filter */}
+    <div className="space-y-2 border border-black/200 rounded-xl p-4">
+      <h4 className="text-sm font-semibold text-gray-700">Filter by Difficulty</h4>
+      <div className="flex flex-wrap gap-2">
+        {difficulties.map((difficulty) => (
+          <Button
+            key={difficulty}
+            variant={selectedDifficulty === difficulty ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setSelectedDifficulty(difficulty)}
+            className={selectedDifficulty === difficulty ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
+          >
+            {difficulty}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
 
         {/* Courses Grid/List */}
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>

@@ -20,6 +20,15 @@ export default function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
         <div className="flex items-center justify-between w-full">
           {/* Left side - Logo and Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
+            
+            <div className="flex items-center space-x-2 border ">
+               <Image
+                    src="/logo.jpg"
+                    alt="EduFlow Logo"
+                    width={84} // or adjust as needed
+                    height={54}
+                  />
+            </div>
             <Button
               variant="ghost"
               size="sm"
@@ -28,15 +37,6 @@ export default function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
             >
               <Menu className="w-5 h-5 text-[#333333]" />
             </Button>
-            <div className="flex items-center space-x-2">
-               <Image
-                    src="/logo.jpg"
-                    alt="EduFlow Logo"
-                    width={84} // or adjust as needed
-                    height={54}
-                  />
-                  <h1 className="text-lg font-bold text-[#333]">EduFlow</h1>
-            </div>
           </div>
 
           {/* Center - Search */}
