@@ -1,11 +1,11 @@
-//TopNavbar.tsx
 "use client";
 
 import React, { useState } from 'react';
-import { Search, Bell, Menu, ChevronDown } from 'lucide-react';
+import { Search, Bell, Menu, ChevronDown, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NotificationPanel from './NotificationPanel';
 import Image from 'next/image';
+import { useTheme } from '@/hooks/useTheme';
 
 interface TopNavbarProps {
   onMobileMenuToggle: () => void;
@@ -13,53 +13,67 @@ interface TopNavbarProps {
 
 export default function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
   const [showNotifications, setShowNotifications] = useState(false);
+  const { isDark, toggle } = useTheme();
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-white  h-18 flex items-center px-6">
+      <header className="fixed top-0 left-0 right-0 z-40 h-18 flex items-center px-6 bg-background text-foreground shadow">
         <div className="flex items-center justify-between w-full">
-          {/* Left side - Logo and Mobile Menu Toggle */}
+          {/* Left Side - Hamburger then Logo */}
           <div className="flex items-center space-x-4">
-            
-            <div className="flex items-center space-x-2 border ">
-               <Image
-                    src="/logo.jpg"
-                    alt="EduFlow Logo"
-                    width={84} // or adjust as needed
-                    height={54}
-                  />
-            </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={onMobileMenuToggle}
-              className="lg:hidden p-2 hover:bg-white/60 rounded-xl"
+              className="lg:hidden p-2 hover:bg-muted rounded-xl"
             >
-              <Menu className="w-5 h-5 text-[#333333]" />
+              <Menu className="w-5 h-5 text-foreground" />
             </Button>
+
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/logo.jpg"
+                alt="EduFlow Logo"
+                width={84}
+                height={54}
+              />
+            </div>
           </div>
 
           {/* Center - Search */}
           <div className="hidden md:block w-full max-w-md mx-8">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search courses, topics..."
-                className="w-full pl-12 pr-4 py-2 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
+                className="w-full pl-12 pr-4 py-2 input-field bg-background text-foreground placeholder-muted-foreground"
               />
             </div>
           </div>
 
-          {/* Right side - Notifications and user */}
+          {/* Right Side - Toggle, Bell, Avatar */}
           <div className="flex items-center space-x-4">
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setShowNotifications(true)}
-              className="relative p-2 hover:bg-white/60 rounded-xl"
+              onClick={toggle}
+              className="p-2 hover:bg-muted rounded-xl"
             >
-              <Bell className="w-5 h-5 text-[#333]" />
+              {isDark ? (
+                <Sun className="w-5 h-5 text-yellow-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-foreground" />
+              )}
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowNotifications(true)}
+              className="relative p-2 hover:bg-muted rounded-xl"
+            >
+              <Bell className="w-5 h-5 text-foreground" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-[#A6E86D] rounded-full shadow">
                 <span className="absolute inset-0 w-3 h-3 bg-[#A6E86D] rounded-full animate-ping"></span>
               </span>
@@ -71,7 +85,7 @@ export default function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
                 alt="User"
                 className="w-8 h-8 rounded-full"
               />
-              <ChevronDown className="w-4 h-4 text-gray-400" />
+              <ChevronDown className="w-4 h-4 text-muted-foreground" />
             </div>
           </div>
         </div>

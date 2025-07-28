@@ -42,29 +42,29 @@ const announcements = [
 const getAnnouncementColor = (type: string) => {
   switch (type) {
     case 'course':
-      return 'border-l-blue-500 bg-blue-50/50';
+      return 'border-l-blue-500 bg-blue-50 dark:bg-blue-900/30';
     case 'maintenance':
-      return 'border-l-orange-500 bg-orange-50/50';
+      return 'border-l-orange-500 bg-orange-50 dark:bg-orange-900/30';
     case 'feature':
-      return 'border-l-green-500 bg-green-50/50';
+      return 'border-l-green-500 bg-green-50 dark:bg-green-900/30';
     case 'schedule':
-      return 'border-l-purple-500 bg-purple-50/50';
+      return 'border-l-purple-500 bg-purple-50 dark:bg-purple-900/30';
     default:
-      return 'border-l-gray-500 bg-gray-50/50';
+      return 'border-l-gray-500 bg-muted';
   }
 };
 
 export default function Announcements() {
   return (
-    <div className="neumorphic-card rounded-2xl p-6 hover-lift">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Announcements</h2>
-        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-50">
+    <div className="neumorphic-card rounded-2xl p-6 hover-lift bg-background text-foreground scrollbar-hide">
+      <div className="flex items-center justify-between mb-6 ">
+        <h2 className="text-xl font-bold text-foreground">Announcements</h2>
+        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-muted">
           View All
         </Button>
       </div>
 
-      <div className="space-y-4 max-h-80 overflow-y-auto">
+      <div className="space-y-4 max-h-80 overflow-y-auto scrollbar-hide rounded-2xl">
         {announcements.map((announcement) => (
           <div
             key={announcement.id}
@@ -73,15 +73,15 @@ export default function Announcements() {
             {announcement.pinned && (
               <Pin className="w-4 h-4 text-blue-500 absolute top-2 right-2" />
             )}
-            
-            <h3 className="font-semibold text-gray-800 mb-2 pr-6">
+
+            <h3 className="font-semibold text-foreground mb-2 pr-6">
               {announcement.title}
             </h3>
-            <p className="text-sm text-gray-600 mb-3 leading-relaxed">
+            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
               {announcement.content}
             </p>
-            
-            <div className="flex items-center text-xs text-gray-500">
+
+            <div className="flex items-center text-xs text-muted-foreground">
               <Clock className="w-3 h-3 mr-1" />
               {announcement.time}
             </div>

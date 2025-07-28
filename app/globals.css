@@ -80,8 +80,14 @@
   }
   
   .neumorphic-card {
-    @apply bg-gradient-to-br from-[#DCEEFF] to-[#EEF4FF] border-0 shadow-lg shadow-blue-200/30 rounded-2xl;
-  }
+  @apply border-0 rounded-2xl shadow-lg transition-colors duration-300;
+  @apply bg-gradient-to-br from-[#DCEEFF] to-[#EEF4FF] shadow-blue-200/30;
+}
+
+.dark .neumorphic-card {
+  @apply bg-gradient-to-br from-[#1A1C1F] to-[#2A2D31] shadow-none;
+}
+
   
   .hover-lift {
     @apply transition-all duration-300 hover:shadow-xl hover:shadow-blue-200/40 hover:-translate-y-2;

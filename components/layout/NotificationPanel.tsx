@@ -1,80 +1,91 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Bell, X, CheckCircle, AlertCircle, Info, Calendar, BookOpen, Award, MessageCircle, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from "react";
+import {
+  Bell,
+  X,
+  CheckCircle,
+  AlertCircle,
+  Info,
+  Calendar,
+  BookOpen,
+  Award,
+  MessageCircle,
+  Settings,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Notification {
   id: string;
-  type: 'assignment' | 'class' | 'announcement' | 'achievement' | 'forum' | 'system';
+  type: "assignment" | "class" | "announcement" | "achievement" | "forum" | "system";
   title: string;
   message: string;
   time: string;
   read: boolean;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   actionUrl?: string;
 }
 
 const notifications: Notification[] = [
   {
-    id: '1',
-    type: 'assignment',
-    title: 'Assignment Due Soon',
-    message: 'React Component Architecture Project is due in 2 days',
-    time: '2 hours ago',
+    id: "1",
+    type: "assignment",
+    title: "Assignment Due Soon",
+    message: "React Component Architecture Project is due in 2 days",
+    time: "2 hours ago",
     read: false,
-    priority: 'high',
-    actionUrl: '/assignments'
+    priority: "high",
+    actionUrl: "/assignments",
   },
   {
-    id: '2',
-    type: 'class',
-    title: 'Live Class Starting',
-    message: 'Database Optimization Strategies starts in 15 minutes',
-    time: '15 minutes ago',
+    id: "2",
+    type: "class",
+    title: "Live Class Starting",
+    message: "Database Optimization Strategies starts in 15 minutes",
+    time: "15 minutes ago",
     read: false,
-    priority: 'high',
-    actionUrl: '/live-classes'
+    priority: "high",
+    actionUrl: "/live-classes",
   },
   {
-    id: '3',
-    type: 'achievement',
-    title: 'New Badge Earned!',
+    id: "3",
+    type: "achievement",
+    title: "New Badge Earned!",
     message: 'Congratulations! You earned the "Quick Learner" badge',
-    time: '1 hour ago',
+    time: "1 hour ago",
     read: false,
-    priority: 'medium',
-    actionUrl: '/certificates'
+    priority: "medium",
+    actionUrl: "/certificates",
   },
   {
-    id: '4',
-    type: 'announcement',
-    title: 'New Course Available',
-    message: 'Machine Learning Fundamentals is now available for enrollment',
-    time: '3 hours ago',
+    id: "4",
+    type: "announcement",
+    title: "New Course Available",
+    message: "Machine Learning Fundamentals is now available for enrollment",
+    time: "3 hours ago",
     read: true,
-    priority: 'medium',
-    actionUrl: '/courses'
+    priority: "medium",
+    actionUrl: "/courses",
   },
   {
-    id: '5',
-    type: 'forum',
-    title: 'New Reply in Discussion',
-    message: 'Someone replied to your question in React Advanced Patterns',
-    time: '5 hours ago',
+    id: "5",
+    type: "forum",
+    title: "New Reply in Discussion",
+    message: "Someone replied to your question in React Advanced Patterns",
+    time: "5 hours ago",
     read: true,
-    priority: 'low',
-    actionUrl: '/forums'
+    priority: "low",
+    actionUrl: "/forums",
   },
   {
-    id: '6',
-    type: 'system',
-    title: 'System Maintenance',
-    message: 'Scheduled maintenance on Jan 20, 2-4 AM. Platform will be offline.',
-    time: '1 day ago',
+    id: "6",
+    type: "system",
+    title: "System Maintenance",
+    message: "Scheduled maintenance on Jan 20, 2-4 AM. Platform will be offline.",
+    time: "1 day ago",
     read: true,
-    priority: 'medium'
-  }
+    priority: "medium",
+  },
 ];
 
 interface NotificationPanelProps {
@@ -84,21 +95,21 @@ interface NotificationPanelProps {
 
 export default function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
   const [notificationList, setNotificationList] = useState(notifications);
-  const [filter, setFilter] = useState<'all' | 'unread'>('all');
+  const [filter, setFilter] = useState<"all" | "unread">("all");
 
   const getNotificationIcon = (type: string) => {
     switch (type) {
-      case 'assignment':
+      case "assignment":
         return <BookOpen className="w-5 h-5 text-orange-500" />;
-      case 'class':
+      case "class":
         return <Calendar className="w-5 h-5 text-blue-500" />;
-      case 'announcement':
+      case "announcement":
         return <Info className="w-5 h-5 text-purple-500" />;
-      case 'achievement':
+      case "achievement":
         return <Award className="w-5 h-5 text-green-500" />;
-      case 'forum':
+      case "forum":
         return <MessageCircle className="w-5 h-5 text-teal-500" />;
-      case 'system':
+      case "system":
         return <Settings className="w-5 h-5 text-gray-500" />;
       default:
         return <Bell className="w-5 h-5 text-gray-500" />;
@@ -107,86 +118,71 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high':
-        return 'border-l-red-500';
-      case 'medium':
-        return 'border-l-yellow-500';
-      case 'low':
-        return 'border-l-green-500';
+      case "high":
+        return "border-l-red-500";
+      case "medium":
+        return "border-l-yellow-500";
+      case "low":
+        return "border-l-green-500";
       default:
-        return 'border-l-gray-300';
+        return "border-l-gray-300";
     }
   };
 
   const markAsRead = (id: string) => {
-    setNotificationList(prev =>
-      prev.map(notif =>
-        notif.id === id ? { ...notif, read: true } : notif
-      )
+    setNotificationList((prev) =>
+      prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif))
     );
   };
 
   const markAllAsRead = () => {
-    setNotificationList(prev =>
-      prev.map(notif => ({ ...notif, read: true }))
-    );
+    setNotificationList((prev) => prev.map((notif) => ({ ...notif, read: true })));
   };
 
   const deleteNotification = (id: string) => {
-    setNotificationList(prev => prev.filter(notif => notif.id !== id));
+    setNotificationList((prev) => prev.filter((notif) => notif.id !== id));
   };
 
-  const filteredNotifications = filter === 'unread' 
-    ? notificationList.filter(notif => !notif.read)
-    : notificationList;
+  const filteredNotifications =
+    filter === "unread" ? notificationList.filter((n) => !n.read) : notificationList;
 
-  const unreadCount = notificationList.filter(notif => !notif.read).length;
+  const unreadCount = notificationList.filter((n) => !n.read).length;
 
   if (!isOpen) return null;
 
   return (
     <>
-      {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-50"
-        onClick={onClose}
-      />
-      
-      {/* Notification Panel */}
-      <div className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300">
+      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
+
+      <div className="fixed top-0 right-0 h-full w-96 bg-white dark:bg-zinc-900 shadow-2xl z-50">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-zinc-700">
           <div>
-            <h2 className="text-xl font-bold text-[#333333]">Notifications</h2>
+            <h2 className="text-xl font-bold text-[#333333] dark:text-white">Notifications</h2>
             {unreadCount > 0 && (
-              <p className="text-sm text-gray-500">{unreadCount} unread</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{unreadCount} unread</p>
             )}
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-xl"
-          >
+          <Button variant="ghost" size="sm" onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-xl">
             <X className="w-5 h-5" />
           </Button>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex p-4 space-x-2 border-b border-gray-200">
+        {/* Filter */}
+        <div className="flex p-4 space-x-2 border-b border-gray-200 dark:border-zinc-700">
           <Button
-            variant={filter === 'all' ? 'default' : 'ghost'}
+            variant={filter === "all" ? "default" : "ghost"}
             size="sm"
-            onClick={() => setFilter('all')}
-            className={filter === 'all' ? 'primary-button' : 'hover:bg-gray-100 rounded-xl'}
+            onClick={() => setFilter("all")}
+            className={filter === "all" ? "primary-button" : "hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl"}
           >
             All ({notificationList.length})
           </Button>
           <Button
-            variant={filter === 'unread' ? 'default' : 'ghost'}
+            variant={filter === "unread" ? "default" : "ghost"}
             size="sm"
-            onClick={() => setFilter('unread')}
-            className={filter === 'unread' ? 'primary-button' : 'hover:bg-gray-100 rounded-xl'}
+            onClick={() => setFilter("unread")}
+            className={filter === "unread" ? "primary-button" : "hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl"}
           >
             Unread ({unreadCount})
           </Button>
@@ -195,77 +191,71 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
               variant="ghost"
               size="sm"
               onClick={markAllAsRead}
-              className="ml-auto hover:bg-gray-100 rounded-xl text-blue-600"
+              className="ml-auto text-blue-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl"
             >
               Mark all read
             </Button>
           )}
         </div>
 
-        {/* Notifications List */}
+        {/* Notification List */}
         <div className="overflow-y-auto max-h-[calc(100vh-200px)] scrollbar-hide">
           {filteredNotifications.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+            <div className="flex flex-col items-center justify-center h-64 text-gray-500 dark:text-gray-400">
               <Bell className="w-12 h-12 mb-4 opacity-50" />
               <p className="text-lg font-medium">No notifications</p>
               <p className="text-sm">You're all caught up!</p>
             </div>
           ) : (
-            <div className="space-y-4 p-4 ">
+            <div className="space-y-4 p-4">
               {filteredNotifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 rounded-xl border-l-4 ${getPriorityColor(notification.priority)} ${
-                    notification.read ? 'bg-gray-50' : 'bg-blue-50'
-                  } hover:shadow-md transition-all duration-300 cursor-pointer`}
                   onClick={() => !notification.read && markAsRead(notification.id)}
+                  className={`p-4 rounded-xl border-l-4 ${getPriorityColor(notification.priority)} ${
+                    notification.read ? "bg-gray-50 dark:bg-zinc-800" : "bg-blue-50 dark:bg-blue-900/30"
+                  } hover:shadow-md transition-all duration-300 cursor-pointer`}
                 >
                   <div className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 mt-1">
-                      {getNotificationIcon(notification.type)}
-                    </div>
-                    
+                    <div className="flex-shrink-0 mt-1">{getNotificationIcon(notification.type)}</div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between">
-                        <h3 className={`text-sm font-semibold ${
-                          notification.read ? 'text-gray-700' : 'text-[#333333]'
-                        }`}>
+                        <h3
+                          className={`text-sm font-semibold ${
+                            notification.read ? "text-gray-700 dark:text-gray-300" : "text-[#333333] dark:text-white"
+                          }`}
+                        >
                           {notification.title}
                         </h3>
-                        {!notification.read && (
-                          <div className="w-2 h-2 bg-blue-500 rounded-full ml-2 mt-1"></div>
-                        )}
+                        {!notification.read && <div className="w-2 h-2 bg-blue-500 rounded-full ml-2 mt-1"></div>}
                       </div>
-                      
-                      <p className={`text-sm mt-1 ${
-                        notification.read ? 'text-gray-600' : 'text-gray-700'
-                      }`}>
+                      <p
+                        className={`text-sm mt-1 ${
+                          notification.read ? "text-gray-600 dark:text-gray-400" : "text-gray-700 dark:text-gray-300"
+                        }`}
+                      >
                         {notification.message}
                       </p>
-                      
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-gray-500">{notification.time}</span>
-                        
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{notification.time}</span>
                         <div className="flex items-center space-x-2">
                           {notification.actionUrl && (
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="text-xs text-blue-600 hover:bg-blue-100 rounded-lg px-2 py-1"
+                              className="text-xs text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg px-2 py-1"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Navigate to action URL
                                 window.location.href = notification.actionUrl!;
                               }}
                             >
                               View
                             </Button>
                           )}
-                          
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="text-xs text-gray-500 hover:bg-gray-200 rounded-lg px-2 py-1"
+                            className="text-xs text-gray-500 hover:bg-gray-200 dark:hover:bg-zinc-700 rounded-lg px-2 py-1"
                             onClick={(e) => {
                               e.stopPropagation();
                               deleteNotification(notification.id);
@@ -284,13 +274,12 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 dark:border-zinc-700">
           <Button
             variant="outline"
-            className="w-full border-gray-200 hover:bg-gray-50 rounded-xl"
+            className="w-full border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 rounded-xl"
             onClick={() => {
-              // Navigate to notification settings
-              window.location.href = '/settings';
+              window.location.href = "/settings";
             }}
           >
             <Settings className="w-4 h-4 mr-2" />

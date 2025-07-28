@@ -62,10 +62,10 @@ const getEventIcon = (type: string) => {
 
 const getEventColors = (color: string) => {
   const colors = {
-    blue: 'bg-blue-100 text-blue-700 border-blue-200',
-    orange: 'bg-orange-100 text-orange-700 border-orange-200',
-    green: 'bg-green-100 text-green-700 border-green-200',
-    purple: 'bg-purple-100 text-purple-700 border-purple-200'
+    blue: 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700/50',
+    orange: 'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700/50',
+    green: 'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700/50',
+    purple: 'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700/50'
   };
   return colors[color as keyof typeof colors] || colors.blue;
 };
@@ -74,8 +74,8 @@ export default function UpcomingClasses() {
   return (
     <div className="neumorphic-card rounded-2xl p-6 hover-lift">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Upcoming Schedule</h2>
-        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-50">
+        <h2 className="text-xl font-bold text-foreground">Upcoming Schedule</h2>
+        <Button variant="ghost" size="sm" className="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20">
           View Calendar
         </Button>
       </div>
@@ -87,35 +87,35 @@ export default function UpcomingClasses() {
           const today = new Date();
           const isToday = eventDate.toDateString() === today.toDateString();
           const isTomorrow = eventDate.toDateString() === new Date(today.getTime() + 24 * 60 * 60 * 1000).toDateString();
-          
-          let dateLabel = eventDate.toLocaleDateString('en-US', { 
-            month: 'short', 
-            day: 'numeric' 
+
+          let dateLabel = eventDate.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric'
           });
-          
+
           if (isToday) dateLabel = 'Today';
           if (isTomorrow) dateLabel = 'Tomorrow';
 
           return (
             <div
               key={event.id}
-              className="bg-white/60 rounded-xl p-4 border border-blue-100/50 hover:shadow-md transition-all duration-300"
+              className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-blue-100/50 dark:border-white/5 hover:shadow-md transition-all duration-300"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-3">
                   <div className={`p-2 rounded-lg border ${getEventColors(event.color)}`}>
                     <Icon className="w-4 h-4" />
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-800 mb-1">
+                    <h3 className="font-semibold text-foreground mb-1">
                       {event.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2">
+                    <p className="text-sm text-muted-foreground mb-2">
                       {event.instructor}
                     </p>
-                    
-                    <div className="flex items-center space-x-4 text-xs text-gray-500">
+
+                    <div className="flex items-center space-x-4 text-xs text-muted-foreground">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-3 h-3" />
                         <span>{dateLabel}</span>
@@ -130,10 +130,10 @@ export default function UpcomingClasses() {
                 </div>
 
                 {event.type === 'live-class' && (
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="outline"
-                    className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                    className="border-blue-200 dark:border-white/5 text-blue-600 dark:text-white-300 hover:bg-black dark:hover:bg-white-900/20"
                   >
                     Join
                   </Button>

@@ -42,8 +42,8 @@ export default function EnrolledCourses() {
   return (
     <div className="neumorphic-card rounded-2xl p-6 hover-lift">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">My Courses</h2>
-        <span className="text-sm text-gray-500 bg-blue-50 px-3 py-1 rounded-full">
+        <h2 className="text-xl font-bold text-foreground">My Courses</h2>
+        <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
           {courses.length} Active
         </span>
       </div>
@@ -52,24 +52,24 @@ export default function EnrolledCourses() {
         {courses.map((course) => (
           <div
             key={course.id}
-            className="bg-white/60 rounded-xl p-4 border border-blue-100/50 hover:shadow-md transition-all duration-300"
+            className="bg-muted rounded-xl p-4 border border-border hover:shadow transition-all duration-300"
           >
             <div className="flex items-start space-x-4">
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-20 h-16 rounded-lg object-cover shadow-sm"
+                className="w-20 h-16 rounded-lg object-cover"
               />
-              
+
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-800 mb-1 truncate">
+                <h3 className="font-semibold text-foreground mb-1 truncate">
                   {course.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">
+                <p className="text-sm text-muted-foreground mb-2">
                   by {course.instructor}
                 </p>
-                
-                <div className="flex items-center space-x-4 text-xs text-gray-500 mb-3">
+
+                <div className="flex items-center space-x-4 text-xs text-muted-foreground mb-3">
                   <div className="flex items-center space-x-1">
                     <BookOpen className="w-3 h-3" />
                     <span>{course.completedLessons}/{course.totalLessons} lessons</span>
@@ -82,15 +82,20 @@ export default function EnrolledCourses() {
 
                 <div className="flex items-center justify-between">
                   <div className="flex-1 mr-4">
-                    <Progress value={course.progress} className="h-2" />
-                    <span className="text-xs text-gray-500 mt-1">
+                    <div className="h-2 w-full rounded-full bg-muted-foreground/20 overflow-hidden">
+                      <div
+                        className="h-2 bg-blue-500 rounded-full transition-all duration-300"
+                        style={{ width: `${course.progress}%` }}
+                      />
+                    </div>
+                    <span className="text-xs text-muted-foreground mt-1 block">
                       {course.progress}% complete
                     </span>
                   </div>
-                  
+
                   <Button 
                     size="sm" 
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-200/50"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
                   >
                     <Play className="w-4 h-4 mr-1" />
                     Continue

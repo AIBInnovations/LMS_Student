@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
-import { BookOpen, Clock, Play, Star, Filter, Search, Grid, List } from 'lucide-react';
+import { BookOpen, Clock, Play, Star, Search, Grid, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
@@ -119,20 +119,16 @@ export default function CoursesPage() {
       case 'not-started':
         return 'bg-[#B6A4F9] text-white';
       default:
-        return 'bg-gray-200 text-gray-700';
+        return 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300';
     }
   };
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'completed':
-        return 'Completed';
-      case 'in-progress':
-        return 'In Progress';
-      case 'not-started':
-        return 'Not Started';
-      default:
-        return 'Unknown';
+      case 'completed': return 'Completed';
+      case 'in-progress': return 'In Progress';
+      case 'not-started': return 'Not Started';
+      default: return 'Unknown';
     }
   };
 
@@ -143,17 +139,16 @@ export default function CoursesPage() {
         <div className="neumorphic-card p-6 hover-lift">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-[#333333] mb-2">My Courses</h1>
-              <p className="text-gray-600">Track your learning progress and continue your journey</p>
+              <h1 className="text-3xl font-bold text-foreground mb-2">My Courses</h1>
+              <p className="text-muted-foreground">Track your learning progress and continue your journey</p>
             </div>
-            
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-white/60 rounded-xl p-1">
+              <div className="flex items-center space-x-2 bg-white/60 dark:bg-white/10 rounded-xl p-1">
                 <Button
                   variant={viewMode === 'grid' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('grid')}
-                  className={viewMode === 'grid' ? 'primary-button' : 'hover:bg-white/80'}
+                  className={viewMode === 'grid' ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10'}
                 >
                   <Grid className="w-4 h-4" />
                 </Button>
@@ -161,7 +156,7 @@ export default function CoursesPage() {
                   variant={viewMode === 'list' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('list')}
-                  className={viewMode === 'list' ? 'primary-button' : 'hover:bg-white/80'}
+                  className={viewMode === 'list' ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10'}
                 >
                   <List className="w-4 h-4" />
                 </Button>
@@ -172,63 +167,58 @@ export default function CoursesPage() {
 
         {/* Filters */}
         <div className="neumorphic-card p-6 hover-lift space-y-6">
-  {/* Search Section */}
-  <div className="space-y-2">
-    <h4 className="text-sm font-semibold text-gray-700">Search Courses</h4>
-    <div className="relative">
-      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-      <input
-        type="text"
-        placeholder="Search by title or keyword..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
-      />
-    </div>
-  </div>
+          <div className="space-y-2">
+            <h4 className="text-sm font-semibold text-foreground">Search Courses</h4>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search by title or keyword..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30 dark:bg-transparent dark:text-white"
+              />
+            </div>
+          </div>
 
-  {/* Filters Section */}
-  <div className="grid grid-cols-1 md:grid-cols-[1fr,0.5fr] gap-6">
-    {/* Category Filter */}
-    <div className="space-y-2 border border-black/200 rounded-xl p-4">
-      <h4 className="text-sm font-semibold text-gray-700">Filter by Category</h4>
-      <div className="flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => setSelectedCategory(category)}
-            className={selectedCategory === category ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
-          >
-            {category}
-          </Button>
-        ))}
-      </div>
-    </div>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,0.5fr] gap-6">
+            <div className="space-y-2 border border-black/20 dark:border-white/20 rounded-xl p-4">
+              <h4 className="text-sm font-semibold text-foreground">Filter by Category</h4>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className={selectedCategory === category ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10 rounded-xl'}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+            </div>
 
-    {/* Difficulty Filter */}
-    <div className="space-y-2 border border-black/200 rounded-xl p-4">
-      <h4 className="text-sm font-semibold text-gray-700">Filter by Difficulty</h4>
-      <div className="flex flex-wrap gap-2">
-        {difficulties.map((difficulty) => (
-          <Button
-            key={difficulty}
-            variant={selectedDifficulty === difficulty ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => setSelectedDifficulty(difficulty)}
-            className={selectedDifficulty === difficulty ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
-          >
-            {difficulty}
-          </Button>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
+            <div className="space-y-2 border border-black/20 dark:border-white/20 rounded-xl p-4">
+              <h4 className="text-sm font-semibold text-foreground">Filter by Difficulty</h4>
+              <div className="flex flex-wrap gap-2">
+                {difficulties.map((difficulty) => (
+                  <Button
+                    key={difficulty}
+                    variant={selectedDifficulty === difficulty ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setSelectedDifficulty(difficulty)}
+                    className={selectedDifficulty === difficulty ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10 rounded-xl'}
+                  >
+                    {difficulty}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
-
-        {/* Courses Grid/List */}
+        {/* Course Cards */}
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
           {filteredCourses.map((course) => (
             <div key={course.id} className="neumorphic-card p-6 hover-lift">
@@ -246,10 +236,10 @@ export default function CoursesPage() {
                   </div>
                   
                   <div>
-                    <h3 className="text-lg font-bold text-[#333333] mb-2">{course.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3">by {course.instructor}</p>
-                    
-                    <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+                    <h3 className="text-lg font-bold text-foreground mb-2">{course.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-3">by {course.instructor}</p>
+
+                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                       <div className="flex items-center space-x-1">
                         <BookOpen className="w-3 h-3" />
                         <span>{course.completedLessons}/{course.totalLessons} lessons</span>
@@ -266,8 +256,8 @@ export default function CoursesPage() {
 
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-[#333333]">Progress</span>
-                        <span className="text-sm text-gray-600">{course.progress}%</span>
+                        <span className="text-sm font-medium text-foreground">Progress</span>
+                        <span className="text-sm text-muted-foreground">{course.progress}%</span>
                       </div>
                       <Progress value={course.progress} className="h-2" />
                     </div>
@@ -285,18 +275,17 @@ export default function CoursesPage() {
                     alt={course.title}
                     className="w-24 h-16 object-cover rounded-xl shadow-lg flex-shrink-0"
                   />
-                  
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-lg font-bold text-[#333333] truncate">{course.title}</h3>
+                      <h3 className="text-lg font-bold text-foreground truncate">{course.title}</h3>
                       <div className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(course.status)} ml-4`}>
                         {getStatusText(course.status)}
                       </div>
                     </div>
-                    
-                    <p className="text-sm text-gray-600 mb-2">by {course.instructor}</p>
-                    
-                    <div className="flex items-center space-x-6 text-xs text-gray-500 mb-3">
+
+                    <p className="text-sm text-muted-foreground mb-2">by {course.instructor}</p>
+
+                    <div className="flex items-center space-x-6 text-xs text-muted-foreground mb-3">
                       <div className="flex items-center space-x-1">
                         <BookOpen className="w-3 h-3" />
                         <span>{course.completedLessons}/{course.totalLessons} lessons</span>
@@ -309,14 +298,14 @@ export default function CoursesPage() {
                         <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                         <span>{course.rating}</span>
                       </div>
-                      <span className="bg-gray-100 px-2 py-1 rounded-full">{course.difficulty}</span>
+                      <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full">{course.difficulty}</span>
                     </div>
 
                     <div className="flex items-center space-x-4">
                       <div className="flex-1">
                         <Progress value={course.progress} className="h-2" />
                       </div>
-                      <span className="text-sm text-gray-600 w-12">{course.progress}%</span>
+                      <span className="text-sm text-muted-foreground w-12">{course.progress}%</span>
                       <Button size="sm" className="primary-button">
                         <Play className="w-4 h-4 mr-1" />
                         {course.status === 'not-started' ? 'Start' : 'Continue'}
@@ -331,9 +320,9 @@ export default function CoursesPage() {
 
         {filteredCourses.length === 0 && (
           <div className="neumorphic-card p-12 text-center">
-            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-[#333333] mb-2">No courses found</h3>
-            <p className="text-gray-600">Try adjusting your filters or search terms</p>
+            <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-foreground mb-2">No courses found</h3>
+            <p className="text-muted-foreground">Try adjusting your filters or search terms</p>
           </div>
         )}
       </div>

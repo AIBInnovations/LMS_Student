@@ -167,10 +167,10 @@ export default function CertificatesPage() {
     <DashboardLayout currentPage="certificates">
       <div className="space-y-6">
         {/* Header */}
-        <div className="neumorphic-card p-6 hover-lift">
+        <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-[#333333] mb-2">Certificates & Badges</h1>
+              <h1 className="text-3xl font-bold text-[#333333] dark:text-white dark:text-white mb-2">Certificates & Badges</h1>
               <p className="text-gray-600">Your achievements and professional credentials</p>
             </div>
             
@@ -193,37 +193,37 @@ export default function CertificatesPage() {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="neumorphic-card p-6 hover-lift text-center">
+          <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift text-center">
             <div className="w-12 h-12 bg-[#4F8FE5] bg-opacity-10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Award className="w-6 h-6 text-[#4F8FE5]" />
             </div>
-            <h3 className="text-2xl font-bold text-[#333333] mb-1">{certificates.length}</h3>
+            <h3 className="text-2xl font-bold text-[#333333] dark:text-white mb-1">{certificates.length}</h3>
             <p className="text-sm text-gray-600">Total Certificates</p>
           </div>
           
-          <div className="neumorphic-card p-6 hover-lift text-center">
+          <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift text-center">
             <div className="w-12 h-12 bg-[#A6E86D] bg-opacity-10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Trophy className="w-6 h-6 text-[#A6E86D]" />
             </div>
-            <h3 className="text-2xl font-bold text-[#333333] mb-1">{earnedBadges.length}</h3>
+            <h3 className="text-2xl font-bold text-[#333333] dark:text-white mb-1">{earnedBadges.length}</h3>
             <p className="text-sm text-gray-600">Badges Earned</p>
           </div>
           
-          <div className="neumorphic-card p-6 hover-lift text-center">
+          <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift text-center">
             <div className="w-12 h-12 bg-[#B6A4F9] bg-opacity-10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Star className="w-6 h-6 text-[#B6A4F9]" />
             </div>
-            <h3 className="text-2xl font-bold text-[#333333] mb-1">
+            <h3 className="text-2xl font-bold text-[#333333] dark:text-white mb-1">
               {Math.round(certificates.reduce((sum, cert) => sum + cert.score, 0) / certificates.length)}%
             </h3>
             <p className="text-sm text-gray-600">Average Score</p>
           </div>
           
-          <div className="neumorphic-card p-6 hover-lift text-center">
+          <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift text-center">
             <div className="w-12 h-12 bg-orange-400 bg-opacity-10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Medal className="w-6 h-6 text-orange-500" />
             </div>
-            <h3 className="text-2xl font-bold text-[#333333] mb-1">
+            <h3 className="text-2xl font-bold text-[#333333] dark:text-white mb-1">
               {certificates.filter(c => c.type === 'professional' || c.type === 'specialist').length}
             </h3>
             <p className="text-sm text-gray-600">Professional Certs</p>
@@ -231,7 +231,7 @@ export default function CertificatesPage() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="neumorphic-card p-6 hover-lift">
+        <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift">
           <div className="flex space-x-2">
             <Button
               variant={activeTab === 'certificates' ? 'default' : 'ghost'}
@@ -256,226 +256,265 @@ export default function CertificatesPage() {
         {activeTab === 'certificates' && (
           <>
             {/* Filters and Search */}
-            <div className="neumorphic-card p-6 hover-lift">
-              <div className="flex flex-col lg:flex-row gap-4">
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type="text"
-                      placeholder="Search certificates..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
-                    />
-                  </div>
-                </div>
+            <div className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift">
+  <div className="flex flex-col lg:flex-row gap-4">
+    <div className="flex-1">
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
+        <input
+          type="text"
+          placeholder="Search certificates..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30 dark:bg-zinc-800 dark:text-white dark:placeholder-gray-400"
+        />
+      </div>
+    </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {filters.map((filter) => (
-                    <Button
-                      key={filter.key}
-                      variant={selectedFilter === filter.key ? 'default' : 'ghost'}
-                      onClick={() => setSelectedFilter(filter.key)}
-                      className={selectedFilter === filter.key ? 'primary-button' : 'hover:bg-white/80 rounded-xl'}
-                    >
-                      {filter.label}
-                      <span className="ml-2 bg-white/30 px-2 py-1 rounded-full text-xs">
-                        {filter.count}
-                      </span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
+    <div className="flex flex-wrap gap-2">
+      {filters.map((filter) => (
+        <Button
+          key={filter.key}
+          variant={selectedFilter === filter.key ? 'default' : 'ghost'}
+          onClick={() => setSelectedFilter(filter.key)}
+          className={
+            selectedFilter === filter.key
+              ? 'primary-button'
+              : 'hover:bg-white/80 dark:hover:bg-zinc-700 rounded-xl text-[#333] dark:text-white'
+          }
+        >
+          {filter.label}
+          <span className="ml-2 bg-white/30 dark:bg-white/10 px-2 py-1 rounded-full text-xs">
+            {filter.count}
+          </span>
+        </Button>
+      ))}
+    </div>
+  </div>
+</div>
 
             {/* Certificates Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredCertificates.map((certificate) => (
-                <div key={certificate.id} className="neumorphic-card p-6 hover-lift">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(certificate.status)}`}>
-                      <div className="flex items-center space-x-1">
-                        <Award className="w-3 h-3" />
-                        <span className="capitalize">{certificate.status}</span>
-                      </div>
-                    </div>
-                    
-                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(certificate.type)}`}>
-                      <div className="flex items-center space-x-1">
-                        {getTypeIcon(certificate.type)}
-                        <span className="capitalize">{certificate.type}</span>
-                      </div>
-                    </div>
-                  </div>
+  {filteredCertificates.map((certificate) => (
+    <div key={certificate.id} className="neumorphic-card dark:bg-zinc-900 p-6 hover-lift">
+      <div className="flex items-start justify-between mb-4">
+        <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(certificate.status)}`}>
+          <div className="flex items-center space-x-1">
+            <Award className="w-3 h-3" />
+            <span className="capitalize">{certificate.status}</span>
+          </div>
+        </div>
 
-                  <div className="flex items-start space-x-4 mb-4">
-                    <img
-                      src={certificate.image}
-                      alt={certificate.title}
-                      className="w-20 h-16 rounded-xl object-cover shadow-lg flex-shrink-0"
-                    />
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-bold text-[#333333] mb-1">{certificate.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{certificate.course}</p>
-                      <p className="text-sm text-gray-500">by {certificate.instructor}</p>
-                    </div>
-                  </div>
+        <div className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(certificate.type)}`}>
+          <div className="flex items-center space-x-1">
+            {getTypeIcon(certificate.type)}
+            <span className="capitalize">{certificate.type}</span>
+          </div>
+        </div>
+      </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                    <div>
-                      <span className="text-gray-500">Issue Date:</span>
-                      <p className="font-medium text-[#333333]">{new Date(certificate.issueDate).toISOString().split('T')[0]}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500">Grade:</span>
-                      <p className="font-medium text-[#333333]">{certificate.grade} ({certificate.score}%)</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500">Credential ID:</span>
-                      <p className="font-medium text-[#333333] text-xs">{certificate.credentialId}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500">
-                        {certificate.expiryDate ? 'Expires:' : 'Valid:'}
-                      </span>
-                      <p className="font-medium text-[#333333]">
-                        {certificate.expiryDate ? new Date(certificate.expiryDate).toLocaleDateString() : 'Lifetime'}
-                      </p>
-                    </div>
-                  </div>
+      <div className="flex items-start space-x-4 mb-4">
+        <img
+          src={certificate.image}
+          alt={certificate.title}
+          className="w-20 h-16 rounded-xl object-cover shadow-lg flex-shrink-0"
+        />
 
-                  {certificate.skills && (
-                    <div className="mb-4">
-                      <p className="text-sm font-medium text-gray-700 mb-2">Skills Verified:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {certificate.skills.map((skill, index) => (
-                          <span key={index} className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg font-bold text-[#333333] dark:text-white mb-1">{certificate.title}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{certificate.course}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">by {certificate.instructor}</p>
+        </div>
+      </div>
 
-                  <div className="flex items-center space-x-2">
-                    <Button size="sm" className="primary-button flex-1">
-                      <Download className="w-4 h-4 mr-1" />
-                      Download
-                    </Button>
-                    <Button size="sm" variant="outline" className="border-blue-200 text-blue-600 hover:bg-blue-50">
-                      <Eye className="w-4 h-4 mr-1" />
-                      View
-                    </Button>
-                    <Button size="sm" variant="outline" className="border-green-200 text-green-600 hover:bg-green-50">
-                      <Share2 className="w-4 h-4 mr-1" />
-                      Share
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+        <div>
+          <span className="text-gray-500 dark:text-gray-400">Issue Date:</span>
+          <p className="font-medium text-[#333333] dark:text-white">
+            {new Date(certificate.issueDate).toISOString().split('T')[0]}
+          </p>
+        </div>
+        <div>
+          <span className="text-gray-500 dark:text-gray-400">Grade:</span>
+          <p className="font-medium text-[#333333] dark:text-white">
+            {certificate.grade} ({certificate.score}%)
+          </p>
+        </div>
+        <div>
+          <span className="text-gray-500 dark:text-gray-400">Credential ID:</span>
+          <p className="font-medium text-[#333333] dark:text-white text-xs">{certificate.credentialId}</p>
+        </div>
+        <div>
+          <span className="text-gray-500 dark:text-gray-400">
+            {certificate.expiryDate ? 'Expires:' : 'Valid:'}
+          </span>
+          <p className="font-medium text-[#333333] dark:text-white">
+            {certificate.expiryDate ? new Date(certificate.expiryDate).toLocaleDateString() : 'Lifetime'}
+          </p>
+        </div>
+      </div>
+
+      {certificate.skills && (
+        <div className="mb-4">
+          <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Skills Verified:</p>
+          <div className="flex flex-wrap gap-2">
+            {certificate.skills.map((skill, index) => (
+              <span key={index} className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full text-xs">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center space-x-2">
+        <Button size="sm" className="primary-button flex-1">
+          <Download className="w-4 h-4 mr-1" />
+          Download
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-blue-200 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-300 dark:hover:bg-blue-900/30"
+        >
+          <Eye className="w-4 h-4 mr-1" />
+          View
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-green-200 text-green-600 hover:bg-green-50 dark:border-green-400 dark:text-green-300 dark:hover:bg-green-900/30"
+        >
+          <Share2 className="w-4 h-4 mr-1" />
+          Share
+        </Button>
+      </div>
+    </div>
+  ))}
+</div>
+
           </>
         )}
 
         {/* Badges Tab */}
         {activeTab === 'badges' && (
-          <div className="space-y-6">
-            {/* Earned Badges */}
-            <div className="neumorphic-card p-6 hover-lift">
-              <h2 className="text-xl font-bold text-[#333333] mb-6">Earned Badges ({earnedBadges.length})</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {earnedBadges.map((badge, index) => (
-                  <div key={index} className="bg-gradient-to-r from-[#DCEEFF] to-[#EEF4FF] rounded-xl p-4 text-center border-2 border-[#4F8FE5]/30 shadow-lg">
-                    <div className="text-4xl mb-3">{badge.icon}</div>
-                    <h3 className="font-semibold text-[#333333] text-sm mb-2">{badge.name}</h3>
-                    <p className="text-xs text-gray-600 mb-3">{badge.description}</p>
-                    <div className="text-xs bg-[#A6E86D] text-white px-2 py-1 rounded-full">
-                      Earned {new Date(badge.date!).toLocaleDateString()}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Available Badges */}
-            <div className="neumorphic-card p-6 hover-lift">
-              <h2 className="text-xl font-bold text-[#333333] mb-6">Available Badges ({availableBadges.length})</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {availableBadges.map((badge, index) => (
-                  <div key={index} className="bg-white/60 rounded-xl p-4 text-center border-2 border-gray-200 opacity-75">
-                    <div className="text-4xl mb-3 grayscale">{badge.icon}</div>
-                    <h3 className="font-semibold text-[#333333] text-sm mb-2">{badge.name}</h3>
-                    <p className="text-xs text-gray-600 mb-3">{badge.description}</p>
-                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                      <div 
-                        className="bg-[#4F8FE5] h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${badge.progress}%` }}
-                      />
-                    </div>
-                    <div className="text-xs text-gray-500">{badge.progress}% complete</div>
-                  </div>
-                ))}
-              </div>
+  <div className="space-y-6">
+    {/* Earned Badges */}
+    <div className="neumorphic-card p-6 hover-lift dark:bg-zinc-900">
+      <h2 className="text-xl font-bold text-[#333333] dark:text-white mb-6">
+        Earned Badges ({earnedBadges.length})
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {earnedBadges.map((badge, index) => (
+          <div
+            key={index}
+            className="rounded-xl p-4 text-center border-2 shadow-lg
+                       bg-gradient-to-r from-[#DCEEFF] to-[#EEF4FF] border-[#4F8FE5]/30
+                       dark:from-blue-900/20 dark:to-blue-800/20 dark:border-blue-900/40"
+          >
+            <div className="text-4xl mb-3">{badge.icon}</div>
+            <h3 className="font-semibold text-[#333333] dark:text-white text-sm mb-2">{badge.name}</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">{badge.description}</p>
+            <div className="text-xs bg-[#A6E86D] text-white px-2 py-1 rounded-full">
+              Earned {new Date(badge.date!).toLocaleDateString()}
             </div>
           </div>
-        )}
+        ))}
+      </div>
+    </div>
+
+    {/* Available Badges */}
+    <div className="neumorphic-card p-6 hover-lift dark:bg-zinc-900">
+      <h2 className="text-xl font-bold text-[#333333] dark:text-white mb-6">
+        Available Badges ({availableBadges.length})
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {availableBadges.map((badge, index) => (
+          <div
+            key={index}
+            className="rounded-xl p-4 text-center border-2 opacity-75
+                       bg-white/60 border-gray-200
+                       dark:bg-zinc-800/70 dark:border-zinc-700"
+          >
+            <div className="text-4xl mb-3 grayscale">{badge.icon}</div>
+            <h3 className="font-semibold text-[#333333] dark:text-white text-sm mb-2">{badge.name}</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">{badge.description}</p>
+            <div className="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2 mb-2">
+              <div
+                className="bg-[#4F8FE5] h-2 rounded-full transition-all duration-300"
+                style={{ width: `${badge.progress}%` }}
+              />
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{badge.progress}% complete</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
 
         {filteredCertificates.length === 0 && activeTab === 'certificates' && (
-          <div className="neumorphic-card p-12 text-center">
-            <Award className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-[#333333] mb-2">No certificates found</h3>
-            <p className="text-gray-600">No certificates match the selected filter or search terms</p>
-          </div>
-        )}
+  <div className="neumorphic-card p-12 text-center dark:bg-zinc-900">
+    <Award className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+    <h3 className="text-xl font-semibold text-[#333333] dark:text-white mb-2">No certificates found</h3>
+    <p className="text-gray-600 dark:text-gray-400">
+      No certificates match the selected filter or search terms
+    </p>
+  </div>
+)}
+
       </div>
       {uploadModalOpen && (
   <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="relative w-full max-w-xl bg-white rounded-2xl p-6 shadow-xl">
-      <h2 className="text-xl font-bold text-[#333] mb-4">Upload Certificate</h2>
+    <div className="relative w-full max-w-xl bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-xl">
+      <h2 className="text-xl font-bold text-[#333] dark:text-white mb-4">Upload Certificate</h2>
 
       <form className="space-y-5">
         {/* Title */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Certificate Title</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Certificate Title
+          </label>
           <input
             type="text"
             placeholder="e.g. Python Fundamentals"
-            className="w-full px-4 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="w-full px-4 py-2 border rounded-xl text-sm bg-white dark:bg-zinc-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 dark:border-zinc-600"
           />
         </div>
 
         {/* Issuer & Date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Issuer</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Issuer</label>
             <input
               type="text"
               placeholder="e.g. EduFlow Academy"
-              className="w-full px-4 py-2 border rounded-xl text-sm"
+              className="w-full px-4 py-2 border rounded-xl text-sm bg-white dark:bg-zinc-800 text-black dark:text-white dark:border-zinc-600"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Issue Date</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Issue Date</label>
             <input
               type="date"
-              className="w-full px-4 py-2 border rounded-xl text-sm"
+              className="w-full px-4 py-2 border rounded-xl text-sm bg-white dark:bg-zinc-800 text-black dark:text-white dark:border-zinc-600"
             />
           </div>
         </div>
 
         {/* Upload Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Upload Certificate File</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Upload Certificate File
+          </label>
 
           <div
-            className="w-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-400 hover:bg-blue-50/20 transition"
+            className="w-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 dark:border-zinc-600 rounded-xl p-6 text-center hover:border-blue-400 hover:bg-blue-50/20 dark:hover:bg-zinc-800/30 transition relative"
           >
             <Upload className="w-8 h-8 text-blue-500 mb-2" />
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Drag & drop a PDF or image file here<br />
-              <span className="text-xs text-gray-500">or click to select</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">or click to select</span>
             </p>
             <input
               type="file"
@@ -489,7 +528,9 @@ export default function CertificatesPage() {
               }}
             />
             {selectedFile && (
-              <p className="mt-3 text-xs text-green-700 font-medium">Selected: {selectedFile}</p>
+              <p className="mt-3 text-xs text-green-700 dark:text-green-400 font-medium">
+                Selected: {selectedFile}
+              </p>
             )}
           </div>
         </div>
@@ -518,13 +559,14 @@ export default function CertificatesPage() {
           setUploadModalOpen(false);
           setSelectedFile('');
         }}
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white"
       >
         <X className="w-5 h-5" />
       </button>
     </div>
   </div>
 )}
+
 
     </DashboardLayout>
   );

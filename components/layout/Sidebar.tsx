@@ -3,7 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Home, BookOpen, Video, FileText, Award, MessageCircle, User, Settings, HelpCircle } from 'lucide-react';
+import {
+  Home, BookOpen, Video, FileText,
+  Award, MessageCircle, User, Settings, HelpCircle
+} from 'lucide-react';
 
 interface SidebarProps {
   isMobileOpen: boolean;
@@ -32,45 +35,47 @@ export default function Sidebar({ isMobileOpen, onMobileClose, currentPage = 'da
       )}
 
       {/* Mobile Sidebar */}
-      <aside className={cn(
-        "lg:hidden fixed top-0 left-0 z-50 h-full bg-white shadow-xl transition-transform duration-300",
-        "w-64",
-        isMobileOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
+      <aside
+        className={cn(
+          "lg:hidden fixed top-0 left-0 z-50 h-full w-64 transition-transform duration-300 shadow-xl",
+          "bg-background text-foreground",
+          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
         <nav className="mt-16 p-4 space-y-2">
           {navigationItems.map((item) => (
             <Link
               href={item.href}
               key={item.key}
               className={cn(
-                "flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-all",
-                currentPage === item.key && "bg-blue-100"
+                "flex items-center space-x-4 p-3 rounded-lg transition-all",
+                "hover:bg-muted",
+                currentPage === item.key && "bg-muted"
               )}
               onClick={onMobileClose}
             >
-              <item.icon className="w-5 h-5 text-[#333]" />
-              <span className="text-sm font-medium text-[#333]">
-                {item.label}
-              </span>
+              <item.icon className="w-5 h-5 text-foreground" />
+              <span className="text-sm font-medium">{item.label}</span>
             </Link>
           ))}
         </nav>
       </aside>
 
-      {/* Desktop Sidebar Content - Fixed, scrollable if needed */}
-      <nav className="hidden lg:block h-full overflow-y-auto">
+      {/* Desktop Sidebar */}
+      <nav className="hidden lg:block h-full overflow-y-auto bg-background text-foreground ">
         <div className="py-4 px-2 space-y-1">
           {navigationItems.map((item) => (
             <Link
               href={item.href}
               key={item.key}
               className={cn(
-                "flex items-center space-x-3 p-3 hover:bg-gray-50 transition-all group-hover:justify-start justify-center",
-                currentPage === item.key && "bg-blue-50 border-r-2 border-blue-500"
+                "flex items-center space-x-3 p-3 rounded-lg transition-all",
+                "hover:bg-muted",
+                currentPage === item.key && "bg-muted border-r-2 border-blue-500"
               )}
             >
-              <item.icon className="w-5 h-5 text-gray-600 flex-shrink-0" />
-              <span className="text-sm font-medium text-gray-700 hidden group-hover:block whitespace-nowrap">
+              <item.icon className="w-5 h-5 text-foreground flex-shrink-0" />
+              <span className="text-sm font-medium hidden group-hover:block whitespace-nowrap">
                 {item.label}
               </span>
             </Link>

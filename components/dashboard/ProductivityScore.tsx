@@ -4,10 +4,10 @@ import React from 'react';
 import { Trophy, Target, Zap, Award } from 'lucide-react';
 
 const stats = [
-  { label: 'Points Earned', value: '2,450', icon: Trophy, color: 'text-yellow-600 bg-yellow-100' },
-  { label: 'Goals Completed', value: '18/25', icon: Target, color: 'text-green-600 bg-green-100' },
-  { label: 'Study Streak', value: '12 days', icon: Zap, color: 'text-orange-600 bg-orange-100' },
-  { label: 'Badges', value: '7', icon: Award, color: 'text-purple-600 bg-purple-100' },
+  { label: 'Points Earned', value: '2,450', icon: Trophy, color: 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30' },
+  { label: 'Goals Completed', value: '18/25', icon: Target, color: 'text-green-600 bg-green-100 dark:bg-green-900/30' },
+  { label: 'Study Streak', value: '12 days', icon: Zap, color: 'text-orange-600 bg-orange-100 dark:bg-orange-900/30' },
+  { label: 'Badges', value: '7', icon: Award, color: 'text-purple-600 bg-purple-100 dark:bg-purple-900/30' },
 ];
 
 export default function ProductivityScore() {
@@ -18,10 +18,10 @@ export default function ProductivityScore() {
   return (
     <div className="neumorphic-card rounded-2xl p-6 hover-lift">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Productivity Score</h2>
+        <h2 className="text-xl font-bold text-foreground">Productivity Score</h2>
         <div className="text-right">
           <div className="text-2xl font-bold text-blue-600">{totalScore}</div>
-          <div className="text-xs text-gray-500">out of {maxScore}</div>
+          <div className="text-xs text-muted-foreground">out of {maxScore}</div>
         </div>
       </div>
 
@@ -36,7 +36,7 @@ export default function ProductivityScore() {
               stroke="currentColor"
               strokeWidth="8"
               fill="transparent"
-              className="text-gray-200"
+              className="text-muted-foreground/20"
             />
             <circle
               cx="50"
@@ -60,13 +60,13 @@ export default function ProductivityScore() {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white/60 rounded-lg p-3 border border-blue-100/50"
+            className="bg-muted rounded-lg p-3 border border-border border-white/10"
           >
             <div className={`w-8 h-8 rounded-lg ${stat.color} flex items-center justify-center mb-2`}>
               <stat.icon className="w-4 h-4" />
             </div>
-            <div className="text-sm font-semibold text-gray-800">{stat.value}</div>
-            <div className="text-xs text-gray-500">{stat.label}</div>
+            <div className="text-sm font-semibold text-foreground">{stat.value}</div>
+            <div className="text-xs text-muted-foreground">{stat.label}</div>
           </div>
         ))}
       </div>

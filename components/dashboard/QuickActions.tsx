@@ -35,8 +35,8 @@ export default function QuickActions() {
   return (
     <div className="neumorphic-card rounded-2xl p-6 hover-lift">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Quick Actions</h2>
-        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-50">
+        <h2 className="text-xl font-bold text-foreground">Quick Actions</h2>
+        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-muted">
           <Plus className="w-4 h-4" />
         </Button>
       </div>
