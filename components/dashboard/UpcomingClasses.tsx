@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Calendar, Clock, Video, FileText, Pizza as Quiz } from 'lucide-react';
@@ -72,10 +72,14 @@ const getEventColors = (color: string) => {
 
 export default function UpcomingClasses() {
   return (
-    <div className="neumorphic-card rounded-2xl p-6 hover-lift">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-foreground">Upcoming Schedule</h2>
-        <Button variant="ghost" size="sm" className="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20">
+    <div className="neumorphic-card rounded-2xl p-4 sm:p-6 hover-lift">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
+        <h2 className="text-lg sm:text-xl font-bold text-foreground">Upcoming Schedule</h2>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 self-start sm:self-auto"
+        >
           View Calendar
         </Button>
       </div>
@@ -101,21 +105,19 @@ export default function UpcomingClasses() {
               key={event.id}
               className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-blue-100/50 dark:border-white/5 hover:shadow-md transition-all duration-300"
             >
-              <div className="flex items-start justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div className="flex items-start space-x-3">
                   <div className={`p-2 rounded-lg border ${getEventColors(event.color)}`}>
                     <Icon className="w-4 h-4" />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-foreground mb-1">
+                    <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">
                       {event.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {event.instructor}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-2">{event.instructor}</p>
 
-                    <div className="flex items-center space-x-4 text-xs text-muted-foreground">
+                    <div className="flex flex-wrap gap-x-4 text-xs text-muted-foreground">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-3 h-3" />
                         <span>{dateLabel}</span>
@@ -133,7 +135,7 @@ export default function UpcomingClasses() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-blue-200 dark:border-white/5 text-blue-600 dark:text-white-300 hover:bg-black dark:hover:bg-white-900/20"
+                    className="border-blue-200 dark:border-white/5 text-blue-600 dark:text-white-300 hover:bg-black dark:hover:bg-white-900/20 w-fit self-end sm:self-auto"
                   >
                     Join
                   </Button>

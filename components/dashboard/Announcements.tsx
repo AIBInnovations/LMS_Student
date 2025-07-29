@@ -56,34 +56,34 @@ const getAnnouncementColor = (type: string) => {
 
 export default function Announcements() {
   return (
-    <div className="neumorphic-card rounded-2xl p-6 hover-lift bg-background text-foreground scrollbar-hide">
-      <div className="flex items-center justify-between mb-6 ">
-        <h2 className="text-xl font-bold text-foreground">Announcements</h2>
-        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-muted">
+    <div className="neumorphic-card rounded-2xl p-4 sm:p-6 hover-lift bg-background text-foreground scrollbar-hide">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
+        <h2 className="text-lg sm:text-xl font-bold text-foreground">Announcements</h2>
+        <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-muted self-start sm:self-auto">
           View All
         </Button>
       </div>
 
-      <div className="space-y-4 max-h-80 overflow-y-auto scrollbar-hide rounded-2xl">
+      <div className="space-y-3 sm:space-y-4 max-h-60 sm:max-h-80 overflow-y-auto scrollbar-hide rounded-2xl">
         {announcements.map((announcement) => (
           <div
             key={announcement.id}
-            className={`border-l-4 ${getAnnouncementColor(announcement.type)} rounded-r-lg p-4 relative`}
+            className={`border-l-4 ${getAnnouncementColor(announcement.type)} rounded-r-lg p-3 sm:p-4 relative`}
           >
             {announcement.pinned && (
-              <Pin className="w-4 h-4 text-blue-500 absolute top-2 right-2" />
+              <Pin className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 absolute top-2 right-2" />
             )}
 
-            <h3 className="font-semibold text-foreground mb-2 pr-6">
+            <h3 className="font-semibold text-foreground mb-2 pr-6 text-sm sm:text-base leading-tight">
               {announcement.title}
             </h3>
-            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 leading-relaxed">
               {announcement.content}
             </p>
 
             <div className="flex items-center text-xs text-muted-foreground">
-              <Clock className="w-3 h-3 mr-1" />
-              {announcement.time}
+              <Clock className="w-3 h-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{announcement.time}</span>
             </div>
           </div>
         ))}

@@ -105,9 +105,7 @@ export default function LiveClassesPage() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
 
-  const filteredClasses = liveClasses.filter(classItem =>
-    selectedFilter === 'all' || classItem.status === selectedFilter
-  );
+  const filteredClasses = liveClasses.filter(c => selectedFilter === 'all' || c.status === selectedFilter);
 
   const filters = [
     { key: 'all', label: 'All Classes', count: liveClasses.length },
@@ -119,13 +117,15 @@ export default function LiveClassesPage() {
   return (
     <DashboardLayout currentPage="live-classes">
       <div className="space-y-6">
+
+        {/* Header */}
         <div className="neumorphic-card p-6 hover-lift">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Live Classes</h1>
               <p className="text-muted-foreground">Join interactive sessions and access recorded content</p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-wrap gap-2">
               <Button className="secondary-button">
                 <Bell className="w-4 h-4 mr-2" />
                 Set Reminders
@@ -138,9 +138,10 @@ export default function LiveClassesPage() {
           </div>
         </div>
 
+        {/* Filters */}
         <div className="neumorphic-card p-6 hover-lift">
           <div className="flex flex-wrap gap-2">
-            {filters.map((filter) => (
+            {filters.map(filter => (
               <Button
                 key={filter.key}
                 variant={selectedFilter === filter.key ? 'default' : 'ghost'}
@@ -148,16 +149,15 @@ export default function LiveClassesPage() {
                 className={selectedFilter === filter.key ? 'primary-button' : 'hover:bg-background rounded-xl'}
               >
                 {filter.label}
-                <span className="ml-2 bg-white/30 dark:bg-white/10 px-2 py-1 rounded-full text-xs">
-                  {filter.count}
-                </span>
+                <span className="ml-2 bg-white/30 dark:bg-white/10 px-2 py-1 rounded-full text-xs">{filter.count}</span>
               </Button>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredClasses.map((classItem) => {
+        {/* Class Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {filteredClasses.map(classItem => {
             const classDate = new Date(`${classItem.date} ${classItem.time}`);
             const now = new Date();
             const isToday = classDate.toDateString() === now.toDateString();
@@ -168,7 +168,7 @@ export default function LiveClassesPage() {
 
             return (
               <div key={classItem.id} className="neumorphic-card p-6 hover-lift">
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(classItem.status)}`}>
                     <div className="flex items-center space-x-2">
                       {getStatusIcon(classItem.status)}
@@ -185,7 +185,7 @@ export default function LiveClassesPage() {
                 <p className="text-sm text-muted-foreground mb-3">{classItem.course} • {classItem.instructor}</p>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{classItem.description}</p>
 
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
                   <div className="flex items-center space-x-1">
                     <Calendar className="w-4 h-4" />
                     <span>{dateLabel}</span>
@@ -200,8 +200,8 @@ export default function LiveClassesPage() {
                   <div className="mb-4">
                     <p className="text-sm font-medium text-foreground mb-2">Topics:</p>
                     <div className="flex flex-wrap gap-2">
-                      {classItem.topics.map((topic, index) => (
-                        <span key={index} className="bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full text-xs">
+                      {classItem.topics.map((topic, i) => (
+                        <span key={i} className="bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full text-xs">
                           {topic}
                         </span>
                       ))}
@@ -209,27 +209,24 @@ export default function LiveClassesPage() {
                   </div>
                 )}
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   {classItem.status === 'live' && (
-                    <Button className="flex-1 mr-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl px-6 py-3 shadow-lg shadow-red-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-red-200/60 hover:-translate-y-1">
-                      <Play className="w-4 h-4 mr-2" />
-                      Join Live Class
+                    <Button className="flex-1 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl px-6 py-3 shadow-lg shadow-red-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-red-200/60 hover:-translate-y-1">
+                      <Play className="w-4 h-4 mr-2" />Join Live Class
                     </Button>
                   )}
                   {classItem.status === 'upcoming' && (
-                    <Button className="flex-1 mr-2 primary-button">
-                      <Bell className="w-4 h-4 mr-2" />
-                      Set Reminder
+                    <Button className="flex-1 primary-button">
+                      <Bell className="w-4 h-4 mr-2" />Set Reminder
                     </Button>
                   )}
                   {classItem.status === 'completed' && classItem.recordingAvailable && (
-                    <Button className="flex-1 mr-2 secondary-button">
-                      <Play className="w-4 h-4 mr-2" />
-                      Watch Recording
+                    <Button className="flex-1 secondary-button">
+                      <Play className="w-4 h-4 mr-2" />Watch Recording
                     </Button>
                   )}
                   {classItem.status === 'completed' && !classItem.recordingAvailable && (
-                    <Button className="flex-1 mr-2" variant="outline" disabled>
+                    <Button className="flex-1" variant="outline" disabled>
                       Recording Not Available
                     </Button>
                   )}
@@ -242,6 +239,7 @@ export default function LiveClassesPage() {
           })}
         </div>
 
+        {/* Quick Join */}
         <div className="neumorphic-card p-6 hover-lift">
           <h2 className="text-xl font-bold text-foreground mb-4">Quick Join</h2>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -251,16 +249,16 @@ export default function LiveClassesPage() {
               className="flex-1 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30 dark:bg-[#121212] dark:text-white"
             />
             <Button className="primary-button">
-              <Video className="w-4 h-4 mr-2" />
-              Join Meeting
+              <Video className="w-4 h-4 mr-2" />Join Meeting
             </Button>
           </div>
         </div>
 
+        {/* Meeting Controls */}
         {selectedFilter === 'live' && (
           <div className="neumorphic-card p-6 hover-lift">
             <h2 className="text-xl font-bold text-foreground mb-4">Meeting Controls</h2>
-            <div className="flex items-center justify-center space-x-4">
+            <div className="flex items-center justify-center flex-wrap gap-4">
               <Button variant="outline" size="lg" className="rounded-full w-12 h-12 p-0">
                 <Mic className="w-5 h-5" />
               </Button>
@@ -274,6 +272,7 @@ export default function LiveClassesPage() {
           </div>
         )}
 
+        {/* No Results */}
         {filteredClasses.length === 0 && (
           <div className="neumorphic-card p-12 text-center">
             <Video className="w-16 h-16 text-gray-400 mx-auto mb-4" />

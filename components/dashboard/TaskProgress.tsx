@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Calendar, TrendingUp, Flame } from 'lucide-react';
@@ -22,9 +22,9 @@ export default function TaskProgress() {
   const streak = 12;
 
   return (
-    <div className="neumorphic-card rounded-2xl p-6 hover-lift">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-foreground">Learning Progress</h2>
+    <div className="neumorphic-card rounded-2xl p-4 sm:p-6 hover-lift">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+        <h2 className="text-lg sm:text-xl font-bold text-foreground">Learning Progress</h2>
         <div className="flex space-x-2">
           <Button
             variant={filter === 'weekly' ? 'default' : 'ghost'}
@@ -46,7 +46,7 @@ export default function TaskProgress() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl p-4">
           <div className="flex items-center space-x-2 mb-1">
             <TrendingUp className="w-4 h-4 text-green-600" />

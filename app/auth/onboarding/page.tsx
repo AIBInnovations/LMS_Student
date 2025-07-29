@@ -312,7 +312,7 @@ const Onboarding = () => {
 
             <button
               onClick={nextStep}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="flex items-center space-x-2 px-2 py-2 sm:px-2 sm:py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               <span className="text-sm">{currentStep === steps.length - 1 ? 'Get Started' : 'Next'}</span>
               <ArrowRight className="w-4 h-4" />

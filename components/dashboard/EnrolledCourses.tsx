@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { BookOpen, Clock, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 
 const courses = [
   {
@@ -40,9 +39,9 @@ const courses = [
 
 export default function EnrolledCourses() {
   return (
-    <div className="neumorphic-card rounded-2xl p-6 hover-lift">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-foreground">My Courses</h2>
+    <div className="neumorphic-card rounded-2xl p-4 sm:p-6 hover-lift">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
+        <h2 className="text-lg sm:text-xl font-bold text-foreground">My Courses</h2>
         <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
           {courses.length} Active
         </span>
@@ -54,22 +53,18 @@ export default function EnrolledCourses() {
             key={course.id}
             className="bg-muted rounded-xl p-4 border border-border hover:shadow transition-all duration-300"
           >
-            <div className="flex items-start space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-4 gap-4">
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-20 h-16 rounded-lg object-cover"
+                className="w-full sm:w-20 h-36 sm:h-16 rounded-lg object-cover"
               />
 
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-foreground mb-1 truncate">
-                  {course.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-2">
-                  by {course.instructor}
-                </p>
+                <h3 className="font-semibold text-foreground mb-1 truncate">{course.title}</h3>
+                <p className="text-sm text-muted-foreground mb-2">by {course.instructor}</p>
 
-                <div className="flex items-center space-x-4 text-xs text-muted-foreground mb-3">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-3">
                   <div className="flex items-center space-x-1">
                     <BookOpen className="w-3 h-3" />
                     <span>{course.completedLessons}/{course.totalLessons} lessons</span>
@@ -80,8 +75,8 @@ export default function EnrolledCourses() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex-1 mr-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="flex-1">
                     <div className="h-2 w-full rounded-full bg-muted-foreground/20 overflow-hidden">
                       <div
                         className="h-2 bg-blue-500 rounded-full transition-all duration-300"
@@ -93,9 +88,9 @@ export default function EnrolledCourses() {
                     </span>
                   </div>
 
-                  <Button 
-                    size="sm" 
-                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  <Button
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
                   >
                     <Play className="w-4 h-4 mr-1" />
                     Continue

@@ -112,14 +112,10 @@ export default function CoursesPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed':
-        return 'bg-[#A6E86D] text-white';
-      case 'in-progress':
-        return 'bg-[#4F8FE5] text-white';
-      case 'not-started':
-        return 'bg-[#B6A4F9] text-white';
-      default:
-        return 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300';
+      case 'completed': return 'bg-[#A6E86D] text-white';
+      case 'in-progress': return 'bg-[#4F8FE5] text-white';
+      case 'not-started': return 'bg-[#B6A4F9] text-white';
+      default: return 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300';
     }
   };
 
@@ -135,7 +131,6 @@ export default function CoursesPage() {
   return (
     <DashboardLayout currentPage="courses">
       <div className="space-y-6">
-        {/* Header */}
         <div className="neumorphic-card p-6 hover-lift">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
@@ -148,7 +143,6 @@ export default function CoursesPage() {
                   variant={viewMode === 'grid' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('grid')}
-                  className={viewMode === 'grid' ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10'}
                 >
                   <Grid className="w-4 h-4" />
                 </Button>
@@ -156,7 +150,6 @@ export default function CoursesPage() {
                   variant={viewMode === 'list' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('list')}
-                  className={viewMode === 'list' ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10'}
                 >
                   <List className="w-4 h-4" />
                 </Button>
@@ -165,52 +158,48 @@ export default function CoursesPage() {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="neumorphic-card p-6 hover-lift space-y-6">
           <div className="space-y-2">
             <h4 className="text-sm font-semibold text-foreground">Search Courses</h4>
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search by title or keyword..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30 dark:bg-transparent dark:text-white"
+                className="w-full pl-12 pr-4 py-3 input-field focus:outline-none focus:ring-2 focus:ring-[#4F8FE5]/30"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-[1fr,0.5fr] gap-6">
-            <div className="space-y-2 border border-black/20 dark:border-white/20 rounded-xl p-4">
+            <div className="space-y-2 border border-black/20 rounded-xl p-4">
               <h4 className="text-sm font-semibold text-foreground">Filter by Category</h4>
               <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
+                {categories.map(category => (
                   <Button
                     key={category}
                     variant={selectedCategory === category ? 'default' : 'ghost'}
                     size="sm"
                     onClick={() => setSelectedCategory(category)}
-                    className={selectedCategory === category ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10 rounded-xl'}
                   >
                     {category}
                   </Button>
                 ))}
               </div>
             </div>
-
-            <div className="space-y-2 border border-black/20 dark:border-white/20 rounded-xl p-4">
+            <div className="space-y-2 border border-black/20 rounded-xl p-4">
               <h4 className="text-sm font-semibold text-foreground">Filter by Difficulty</h4>
               <div className="flex flex-wrap gap-2">
-                {difficulties.map((difficulty) => (
+                {difficulties.map(level => (
                   <Button
-                    key={difficulty}
-                    variant={selectedDifficulty === difficulty ? 'default' : 'ghost'}
+                    key={level}
+                    variant={selectedDifficulty === level ? 'default' : 'ghost'}
                     size="sm"
-                    onClick={() => setSelectedDifficulty(difficulty)}
-                    className={selectedDifficulty === difficulty ? 'primary-button' : 'hover:bg-white/80 dark:hover:bg-white/10 rounded-xl'}
+                    onClick={() => setSelectedDifficulty(level)}
                   >
-                    {difficulty}
+                    {level}
                   </Button>
                 ))}
               </div>
@@ -218,42 +207,31 @@ export default function CoursesPage() {
           </div>
         </div>
 
-        {/* Course Cards */}
         <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
-          {filteredCourses.map((course) => (
+          {filteredCourses.map(course => (
             <div key={course.id} className="neumorphic-card p-6 hover-lift">
               {viewMode === 'grid' ? (
                 <div className="space-y-4">
                   <div className="relative">
-                    <img
-                      src={course.image}
-                      alt={course.title}
-                      className="w-full h-48 object-cover rounded-xl shadow-lg"
-                    />
+                    <img src={course.image} alt={course.title} className="w-full h-48 object-cover rounded-xl shadow-lg" />
                     <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(course.status)}`}>
                       {getStatusText(course.status)}
                     </div>
                   </div>
-                  
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">{course.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">by {course.instructor}</p>
-
                     <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                       <div className="flex items-center space-x-1">
-                        <BookOpen className="w-3 h-3" />
-                        <span>{course.completedLessons}/{course.totalLessons} lessons</span>
+                        <BookOpen className="w-3 h-3" /><span>{course.completedLessons}/{course.totalLessons} lessons</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{course.duration}</span>
+                        <Clock className="w-3 h-3" /><span>{course.duration}</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        <span>{course.rating}</span>
+                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" /><span>{course.rating}</span>
                       </div>
                     </div>
-
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-sm font-medium text-foreground">Progress</span>
@@ -261,55 +239,37 @@ export default function CoursesPage() {
                       </div>
                       <Progress value={course.progress} className="h-2" />
                     </div>
-
-                    <Button className="w-full primary-button">
+                    <Button className="w-full">
                       <Play className="w-4 h-4 mr-2" />
                       {course.status === 'not-started' ? 'Start Course' : 'Continue Learning'}
                     </Button>
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center space-x-6">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-24 h-16 object-cover rounded-xl shadow-lg flex-shrink-0"
-                  />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                  <img src={course.image} alt={course.title} className="w-full sm:w-28 h-36 sm:h-20 object-cover rounded-xl shadow-lg flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between mb-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1 sm:gap-2">
                       <h3 className="text-lg font-bold text-foreground truncate">{course.title}</h3>
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(course.status)} ml-4`}>
-                        {getStatusText(course.status)}
-                      </div>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(course.status)}`}>{getStatusText(course.status)}</div>
                     </div>
-
                     <p className="text-sm text-muted-foreground mb-2">by {course.instructor}</p>
-
-                    <div className="flex items-center space-x-6 text-xs text-muted-foreground mb-3">
-                      <div className="flex items-center space-x-1">
-                        <BookOpen className="w-3 h-3" />
-                        <span>{course.completedLessons}/{course.totalLessons} lessons</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{course.duration}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        <span>{course.rating}</span>
-                      </div>
+                    <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground mb-3">
+                      <div className="flex items-center space-x-1"><BookOpen className="w-3 h-3" /><span>{course.completedLessons}/{course.totalLessons} lessons</span></div>
+                      <div className="flex items-center space-x-1"><Clock className="w-3 h-3" /><span>{course.duration}</span></div>
+                      <div className="flex items-center space-x-1"><Star className="w-3 h-3 fill-yellow-400 text-yellow-400" /><span>{course.rating}</span></div>
                       <span className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full">{course.difficulty}</span>
                     </div>
-
-                    <div className="flex items-center space-x-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <div className="flex-1">
                         <Progress value={course.progress} className="h-2" />
                       </div>
-                      <span className="text-sm text-muted-foreground w-12">{course.progress}%</span>
-                      <Button size="sm" className="primary-button">
-                        <Play className="w-4 h-4 mr-1" />
-                        {course.status === 'not-started' ? 'Start' : 'Continue'}
-                      </Button>
+                      <div className="flex justify-between items-center sm:justify-normal sm:space-x-4">
+                        <span className="text-sm text-muted-foreground">{course.progress}%</span>
+                        <Button size="sm">
+                          <Play className="w-4 h-4 mr-1" />{course.status === 'not-started' ? 'Start' : 'Continue'}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
